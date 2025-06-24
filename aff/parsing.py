@@ -35,7 +35,7 @@ from pyparsing import (
     pyparsing_common as ppc, Opt,
 )
 
-from .token import AffToken
+from aff.token import AffToken
 
 AK = AffToken.Keyword
 AV = AffToken.Value
