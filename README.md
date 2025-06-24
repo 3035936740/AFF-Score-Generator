@@ -2,7 +2,11 @@
 <p align="center">616 SB!</p>
 
 ## requirements
- - pyparsing~=3.0.9
+- pydantic~=2.8.2
+- Pillow~=10.0.1
+- opencv-python~=4.9.0.80
+- numpy~=1.26.2
+- pyparsing~=3.1.2
 
 ## What is this for?
 Generates reasonable scores and categories such as Shiny Pure, Pure, Far, and Lost based on AFF  
