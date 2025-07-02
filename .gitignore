@@ -1,2 +1,4 @@
-example.aff
 **/__pycache__
+ignore
+.venv
+songs

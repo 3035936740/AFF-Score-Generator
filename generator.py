@@ -1,6 +1,6 @@
 from element import *
-from aff.decoder import *
-from utils import read_file
+from aff.decoder import parse_aff_content, parse_aff
+from utils import read_file, read_content
 import random
 
 PM_SCORE = 10000000 
@@ -75,14 +75,23 @@ class ScoreDetail:
         self.miss_count = lost_count
         self.score = score
         self.detail = detail
+    
+    def __str__(self):
+        return (f"ScoreDetail(shiny_perfect_count={self.shiny_perfect_count}, "
+                f"perfect_count={self.perfect_count}, near_count={self.near_count}, "
+                f"miss_count={self.miss_count}, score={self.score}, detail={self.detail})")
 
-def GenerateContent(aff_path: str, min_score: int = 9800000, max_score: int = 9880000, attempts: int = 100000) -> ScoreDetail:
-    chart = parse_aff(read_file(aff_path))
-    max_combo = chart.get_total_combo()
+def GenerateContent(input: str, min_score: int = 9500000, max_score: int = 9999999, attempts: int = 1000000, is_content: bool = False) -> ScoreDetail:
+    chart = None
+    if is_content:
+        chart = parse_aff_content(read_content(input))
+    else:
+        chart = parse_aff(read_file(input))
     max_note = chart.get_combo_of(Tap) # shiny_pure, pure, far, lost
     max_tap = chart.get_combo_of(ArcTap) # shiny_pure, pure, far, lost
     max_hold = chart.get_combo_of(Hold) # shiny_pure, lost
     max_arc = chart.get_combo_of(Arc) # shiny_pure, lost
+    max_combo = max_note + max_tap + max_hold + max_arc
     
     single_pure_score = PM_SCORE / max_combo
     single_far_score = single_pure_score / 2

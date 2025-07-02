@@ -97,3 +97,26 @@ def parse_aff(aff: list[str]) -> Chart:
     command_list: list[Command] = parse_command_dict(command_dict)
 
     return Chart(header_dict, command_list)
+
+def parse_aff_content(aff: list[str]) -> Chart:
+    """
+    Parse aff file and return a Chart object.
+
+    Usage::
+
+        from utils import read_file
+        parse_aff(read_file(aff_path))
+    """
+    header_dict: dict = {}
+
+    # record headers (before '-\n')
+    while (line := aff.pop(0)) != '-':
+        key, value = parse_header(line)
+        header_dict[key] = value
+
+    # record commands (use PyParsing to parse rest of lines directly)
+    rest_content = ''.join(aff)
+    command_dict: dict[str, list] = command.parse_string(rest_content).as_dict()
+    command_list: list[Command] = parse_command_dict(command_dict)
+
+    return Chart(header_dict, command_list)

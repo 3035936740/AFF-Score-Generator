@@ -1,25 +1,19 @@
+import asyncio
 from generator import GenerateContent, ScoreDetail
 
-def main():
-    aff_path = "example.aff"
-    content = GenerateContent(aff_path)
+async def main():
+    aff_full_path = "songs/vulcanus/2.aff"
     
-    shiny_perfect_count = content.shiny_perfect_count
-    perfect_count = content.perfect_count
-    near_count = content.near_count
-    miss_count = content.miss_count
-    score = content.score
-    detail = content.detail
+    content : ScoreDetail  = GenerateContent(aff_full_path, is_content=False)
+    print(content)
     
-    print("============================")
-    print("shiny_perfect_count:", shiny_perfect_count)
-    print("perfect_count:", perfect_count)
-    print("near_count:", near_count)
-    print("miss_count:", miss_count)
-    print("score:", score)
-    print("----------------------------")
-    print("detail:",detail)
-    print("============================")
+    aff_full_path = "songs/alterego/2.aff"
+
+    with open(aff_full_path, 'r', encoding='utf-8') as file:
+        aff_content = file.read()
+    
+    content : ScoreDetail  = GenerateContent(aff_content, is_content=True)
+    print(content)
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

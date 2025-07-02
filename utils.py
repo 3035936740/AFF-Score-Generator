@@ -7,6 +7,9 @@ from typing import Iterable
 
 from model import Song
 
+def read_content(content: str) -> list[str]:
+    """Return the lines of a file as list[str]."""
+    return content.splitlines()
 
 def read_file(file_path: str) -> list[str]:
     """Return the lines of a file as list[str]."""
