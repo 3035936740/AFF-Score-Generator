@@ -2,7 +2,7 @@ import asyncio
 from generator import GenerateContent, ScoreDetail
 
 async def main():
-    aff_full_path = "songs/vulcanus/2.aff"
+    aff_full_path = "songs/altergate/2.aff"
     
     content : ScoreDetail  = GenerateContent(aff_full_path, is_content=False)
     print(content)

@@ -326,7 +326,8 @@ class Arc(LongNote):
             color: int,
             hit_sound: str,
             is_skyline: str,
-            arctap_list: list[Optional['ArcTap']],
+            smoothness: Optional[float] = None,
+            arctap_list: list[Optional['ArcTap']] = [],
     ):
         self.t1 = t1
         self.t2 = t2
@@ -344,6 +345,7 @@ class Arc(LongNote):
                               AffToken.Value.SkyLine.false: False,
                               AffToken.Value.SkyLine.designant: True
                           }[is_skyline] or bool(arctap_list)
+        self.smoothness = smoothness
         self.skyline_raw_type = is_skyline
         self.arctap_list = arctap_list
 
